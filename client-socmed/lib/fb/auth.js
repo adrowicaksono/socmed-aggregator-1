@@ -7,22 +7,22 @@ window.fbAsyncInit = function() {
     });
 
 
-    FB.getLoginStatus(function(response) {
-      statusChangeCallback(response);
-    });
+    // FB.getLoginStatus(function(response) {
+    //   statusChangeCallback(response);
+    // });
 };
 
-function statusChangeCallback(response) {
-    if (response.status === 'connected') {
-        console.log("connected with facebook bro")
-        // redirect ke home
-        testAPI();
-    } else {
-        // The person is not logged into your app or we are unable to tell.
-        document.getElementById('status').innerHTML = 'Please log ' +
-        'into this app.';
-    }
-}
+// function statusChangeCallback(response) {
+//     if (response.status === 'connected') {
+//         console.log("connected with facebook bro")
+//         // redirect ke home
+//         testAPI();
+//     } else {
+//         // The person is not logged into your app or we are unable to tell.
+//         document.getElementById('status').innerHTML = 'Please log ' +
+//         'into this app.';
+//     }
+// }
 
 (function(d, s, id) {
     var js, fjs = d.getElementsByTagName(s)[0];
@@ -53,23 +53,20 @@ function signUpWithFb (fbToken){
     .then(response => {
         localStorage.setItem('token', response.data)
         window.location.replace('home.html')
-        console.log(response.data)
     })
     .catch(err => {
-        console.log(err.message)
         window.location.replace('index.html')
     })
 }
 
 function logout(){
-    if(localStorage.getItem('fbToken')){
-        FB.logout(function(response) {
-            // Person is now logged out
-            localStorage.clear()
-            window.location.replace('index.html')
-         });
-    }else{
+    // if(localStorage.getItem('fbToken')){
+    //     FB.logout(function(response) {
+    //         localStorage.clear()
+    //         window.location.replace('index.html')
+    //      });
+    // }else{
         localStorage.clear()
         window.location.replace('index.html')
-    }
+    // }
 }

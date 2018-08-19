@@ -33,8 +33,10 @@ const getUser = (req,res) => {
 const createRepo = (req, res) => {
     jwt.verify(req.headers.token, process.env.tokenSecretKey, function(err, decoded) {
       if(err) res.status(401).json({msg:"is not user"})
+
         let obj = {}
             obj['name'] = req.body.name
+
         var options = {
             url: `https://api.github.com/user/repos?access_token=${process.env.gitAcces_Token}`,
             headers: {
@@ -43,12 +45,13 @@ const createRepo = (req, res) => {
             },
             json : obj
           };
-          function callback(error, response, body) {
-            if (!error) {
-            //   var info = JSON.parse(body);
-              res.status(200).json(body)
-            }
+
+        function callback(error, response, body) {
+          if (!error) {
+          //   var info = JSON.parse(body);
+            res.status(200).json(body)
           }
+        }
           
           request.post(options, callback);
     })
